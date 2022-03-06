@@ -26,6 +26,7 @@ const PlanetsProvider = ({ children }) => {
   };
 
   // Requisito 03 e 04 - Filter Numeric
+  // Requisito 03 realizado com ajuda do meu colega Yang Won T17
   const updateFilter = (array) => {
     const result = array.filter((planet) => {
       if (comparison === 'maior que') {
