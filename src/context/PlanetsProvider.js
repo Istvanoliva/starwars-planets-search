@@ -9,6 +9,7 @@ const PlanetsProvider = ({ children }) => {
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [number, setNumber] = useState(0);
+  const [options, setOptions] = useState([]);
 
   // Requisito 01 - Fetch Planets
   const getPlanets = async () => {
@@ -25,7 +26,7 @@ const PlanetsProvider = ({ children }) => {
     setFilterPlanets({ filterByName: { name: target.value } });
   };
 
-  // Requisito 03 e 04 - Filter Numeric
+  // Requisito 03, 04 e 05 - Filter Numeric
   // Requisito 03 realizado com ajuda do meu colega Yang Won T17
   const updateFilter = (array) => {
     const result = array.filter((planet) => {
@@ -37,8 +38,13 @@ const PlanetsProvider = ({ children }) => {
       }
       return Number(planet[column]) === Number(number);
     });
+    setOptions((prevState) => ([...prevState, column]));
     setPlanets(result);
   };
+
+  // Requisito 05
+  const allOptions = ['population', 'orbital_period',
+    'diameter', 'rotation_period', 'surface_water'];
 
   const STATE = {
     data: planets,
@@ -50,6 +56,9 @@ const PlanetsProvider = ({ children }) => {
     setComparison,
     setNumber,
     filterByNumericValues: { column, comparison, number },
+    options,
+    setOptions,
+    allOptions,
   };
 
   return (

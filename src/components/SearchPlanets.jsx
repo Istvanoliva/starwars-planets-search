@@ -4,7 +4,7 @@ import PlanetsContext from '../context/PlanetsContext';
 const SearchPlanets = () => {
   const { setFilter, setColumn, setComparison, setNumber,
     filterByNumericValues: { column, number, comparison },
-    updateFilter, data } = useContext(PlanetsContext);
+    updateFilter, data, options, allOptions } = useContext(PlanetsContext);
 
   return (
     <form>
@@ -25,11 +25,10 @@ const SearchPlanets = () => {
           value={ column }
           onChange={ ({ target: { value } }) => setColumn(value) }
         >
-          <option>population</option>
-          <option>orbital_period</option>
-          <option>diameter</option>
-          <option>rotation_period</option>
-          <option>surface_water</option>
+          { allOptions.map((option) => (
+            options.every((filter) => filter !== option)
+            && <option key={ option } value={ option }>{ option }</option>
+          )) }
         </select>
       </label>
       <label htmlFor="comparison">
